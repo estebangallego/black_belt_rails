@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-md-4">
+		<a class="btn btn-success" href="/posts/">Ideas</a>
+	</div>
+	<div class="col-md-4">
+		<a class="btn btn-danger" href="/signout/">Logout</a>		
+	</div>
+</div>
+
+
+<div class="row">
+	<h3>Name: <%= current_user.first_name %></h3>
+	<h3>Alias: <%= current_user.last_name %></h3>
+	<h3>Email: <%= current_user.email %></h3>
+	<hr />
+	<h4>Post counter <%= @postCounter %></h4>
+	<h4>Likes counter <%= @likesCounter %></h4>
+</div>

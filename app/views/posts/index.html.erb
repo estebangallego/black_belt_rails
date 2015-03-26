@@ -1,0 +1,44 @@
+<div class="row">
+	<div class="col-md-8">
+		<h3>Hi <%= current_user.first_name %></h3>
+	</div>
+		<%if flash[:danger] %>
+				<% flash[:danger].each do |error| %>
+					<h5 class="alert alert-danger"><%=error %></h5>
+				<% end %>
+			<% end %>
+
+			<% if flash[:success] %>
+				<h5 class="alert alert-success"><%=flash[:success]%></h5>
+			<% end %>	
+	
+	<div class="col-md-4">
+		<a class="btn btn-danger" href="/signout/">Logout</a>		
+	</div>
+</div>
+<div class="row">
+	<h3>Ideas</h3>
+	<form action="/posts" method="post">
+		<input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+		<div class="form-group">
+			<input type="hidden" name="post[user_id]" value="<%= session[:user_id]%>">
+			<textarea name="post[post]" class="form-control"></textarea>
+			<br />
+			<button type="submit" class="btn btn-primary">Idea</button>
+		</div>
+	</form>
+</div>
+<div class="row">
+	<% @posts.reverse.each do |post| %>
+		<% if current_user.id == post.user_id %>
+			<h3><a href="/users/<%= post.user.id %>"><%= post.user.first_name %></a></h3>
+			<p><%= post.post %></p>
+			<a href="/likes/destroy/<%= post.id %>" class="btn btn-danger">Delete your post</a>
+			<a href="/posts/show/<%= post.id %>" class="btn btn-warning">You have <%= post.likes.count %> like!</a>
+		<% else %>
+			<h3><a href="/users/<%= post.user.id %>"><%= post.user.first_name %></a></h3>
+			<p><%= post.post %></p>
+			<a href="/likes/create/<%= post.id %>" class="btn btn-success">Like</a> <a href="/posts/show/<%= post.id %>" class="btn btn-warning">You have <%= post.likes.count %> like!</a>
+		<% end %>	
+	<% end %>
+</div>

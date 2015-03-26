@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-8">
+		<h3><%= @post.user.last_name %> says</h3>
+	</div>
+	
+	<div class="col-md-4">
+		<a class="btn btn-primary" href="/posts/">Ideas</a>
+		<a class="btn btn-danger" href="/signout/">Logout</a>
+	</div>
+</div>
+
+<div class="row">
+	
+	<p><%= @post.post %> </p>
+</div>
+<h2>People who like this post</h2>
+<div class="row">
+	<table class="table">
+		<thead>
+			<tr>
+				<td><h3>Alias</h3></td>
+				<td><h3>Post</h3></td>
+			</tr>
+		</thead>
+		<tbody>
+			<% @postInfo.uniq.each do |post|%>
+			<%  %>
+			<tr>
+				<td><%= post.user.last_name %></td>
+				<td><%= post.post.post %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+
